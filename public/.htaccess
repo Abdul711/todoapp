@@ -1,0 +1,12 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Redirect non-existing paths to index.php (main router)
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.php [QSA,L]
+
+    # Optional: Support accessing .php files without extension
+    RewriteCond %{REQUEST_FILENAME}.php -f
+    RewriteRule ^(.+)$ $1.php [L]
+</IfModule>
