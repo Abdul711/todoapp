@@ -13,8 +13,6 @@ A lightweight Todo List application built from scratch using modern **OOP**, **c
 - ✅ Repository & Service Layer (Design Patterns)
 - ✅ Secure PDO database interaction
 - ✅ Environment configuration via `.env`
-- ✅ Blade-style templating (`<?= $tasks ?>`, `@foreach`, etc.)
-- ✅ CSRF token implementation for forms
 - ✅ Custom router with support for dynamic parameters
 - ✅ Responsive, modern UI using **Tailwind CSS**
 - ✅ SOLID principle applied across components
@@ -73,12 +71,14 @@ Custom Routing	Basic Laravel-style routing with dynamic segments
 👨‍💻 Author
 Abdul Samad – PHP & Laravel Developer
 📍 Karachi, Pakistan
+
 🧩 Future Enhancements
 User authentication system (login/register)
 Pagination, search, and filter tasks
 REST API version
 Admin dashboard module
-
+Blade-style templating (`<?= $tasks ?>`, `@foreach`, etc.)
+CSRF token implementation for forms
 🤝 License
 This project is open-source and free to use under the MIT License.
 
