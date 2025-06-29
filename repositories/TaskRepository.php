@@ -1,37 +1,44 @@
 <?php
 require_once __DIR__ . '/../interfaces/TaskRepositoryInterface.php';
-
+require_once __DIR__.'/../app/Models/Task.php';
+use App\Models\Task;
 class TaskRepository implements TaskRepositoryInterface {
     private $conn;
-
+    private $taskModel;
     public function __construct($db) {
         $this->conn = $db;
+       
+        $this->taskModel = new Task($this->conn);
     }
 
     public function getAll() {
-        $stmt = $this->conn->prepare("SELECT * FROM tasks");
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        $tasks = $this->taskModel->all();
+        return $tasks;
     }
 
     public function getById($id) {
-        $stmt = $this->conn->prepare("SELECT * FROM tasks WHERE id = ?");
-        $stmt->execute([$id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+     return $this->taskModel->find($id);
+       
     }
 
     public function create($data) {
-        $stmt = $this->conn->prepare("INSERT INTO tasks (title) VALUES (?)");
-        return $stmt->execute([$data['title']]);
+         return $this->taskModel->fill([
+        'title' => $data['title'],
+        'completed' => 0
+    ])->create();
+      
     }
 
     public function update($id, $data) {
-        $stmt = $this->conn->prepare("UPDATE tasks SET title = ?, completed = ? WHERE id = ?");
-        return $stmt->execute([$data['title'], $data['completed'], $id]);
+    
+ return $this->taskModel->fill([
+    'title' => $data['title']
+    
+])->update($id);
     }
 
     public function delete($id) {
-        $stmt = $this->conn->prepare("DELETE FROM tasks WHERE id = ?");
-        return $stmt->execute([$id]);
+       return $this->taskModel->delete($id);
     }
 }

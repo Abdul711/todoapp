@@ -38,7 +38,6 @@ class TaskController extends Controller {
   
          $this->service->deleteTask($id);
           $this->redirect("index");
-    //    
-    //    $this->redirect("index");
+    
     }
 }
