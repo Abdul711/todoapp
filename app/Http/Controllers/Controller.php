@@ -13,8 +13,7 @@ abstract class Controller
     {
         extract($data);
 
-        $viewPath = __DIR__ . '/../views/' . $file . '.php';
-
+      $viewPath = dirname(__DIR__, 3) . '/views/' . $file . '.php';
         if (!file_exists($viewPath)) {
             http_response_code(500);
             echo "🚫 View '$file' not found at: $viewPath";
