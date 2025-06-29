@@ -25,7 +25,7 @@ class TaskController extends Controller {
 
     public function edit($id) {
         $task = $this->service->getTaskById($id);
-        print_r($task);
+          $this->view('edit', ['task' => $task]);
         // $this->view("edit");
     }
 
