@@ -28,7 +28,7 @@ abstract class Model
     public function __get($key)
     {
         $method = 'get' . ucfirst($key) . 'Attribute';
-   
+
         if (method_exists($this, $method)) {
             // Always call the accessor with the raw value, even if null
             $value = $this->attributes[$key] ?? null;
@@ -112,12 +112,22 @@ abstract class Model
     public function all(): array
     {
         $sql = "SELECT * FROM {$this->table} WHERE deleted_at IS NULL";
-    $stmt = $this->db->prepare($sql);
-    $stmt->execute();
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
 
-    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    return array_map(fn($row) => (new static($this->db))->fill($row), $rows);
+        return array_map(fn($row) => (new static($this->db))->fill($row), $rows);
+    }
+    public function __call($method, $parameters)
+    {
+        $scopeMethod = 'scope' . ucfirst($method);
+
+        if (method_exists($this, $scopeMethod)) {
+            return $this->$scopeMethod(...$parameters);
+        }
+
+        throw new \BadMethodCallException("Method $method does not exist.");
     }
 
     // Pagination

@@ -9,10 +9,17 @@ class Task extends Model
 
     protected $fillable = [
         'title',
-        'completed'
+        'completed',
+        'id'
     ];
      public function getTitleAttribute($value)
     {
         return Str::lower($value); // Always return name in uppercase
     }
+        public function scopePublished(): static
+    {
+        return $this->where('completed', '=', '1');
+    }
+
+
 }

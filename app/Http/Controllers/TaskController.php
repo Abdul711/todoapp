@@ -12,8 +12,7 @@ class TaskController extends Controller {
 
     public function index() {
         $tasks = $this->service->getTasks();
-  
-      
+
         $this->view('index', ['tasks' => $tasks]);
     }
 
