@@ -7,9 +7,9 @@
     <ul>
         <?php foreach ($tasks as $task): ?>
             <li>
-                <?= $task['title'] ?> - <?= $task['completed'] ? '✅' : '❌' ?>
-                <a href="/todoapp/edit/<?= $task['id'] ?>">Edit</a>
-                <a href="/todoapp/delete/<?= $task['id']?>" >Delete</a>
+                <?= $task->title ?> - <?= $task->completed ? '✅' : '❌' ?>
+                <a href="/todoapp/edit/<?= $task->id ?>">Edit</a>
+                <a href="/todoapp/delete/<?= $task->id?>" >Delete</a>
             </li>
         <?php endforeach; ?>
     </ul>

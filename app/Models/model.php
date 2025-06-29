@@ -6,7 +6,7 @@ namespace App\Models;
 use PDO;
 
 
-abstract class Model 
+abstract class Model
 {
     protected $db;
     protected $table;
@@ -25,7 +25,22 @@ abstract class Model
     {
         $this->db = $db;
     }
+    public function __get($key)
+    {
+        $method = 'get' . ucfirst($key) . 'Attribute';
+   
+        if (method_exists($this, $method)) {
+            // Always call the accessor with the raw value, even if null
+            $value = $this->attributes[$key] ?? null;
+            return $this->$method($value);
+        }
 
+        return $this->attributes[$key] ?? null;
+    }
+    //   public function getAttributes(): array
+    // {
+    //     return $this->attributes;
+    // }
     public function fill(array $data): static
     {
         foreach ($this->fillable as $field) {
@@ -96,9 +111,13 @@ abstract class Model
 
     public function all(): array
     {
-        $stmt = $this->db->prepare("SELECT * FROM {$this->table} WHERE deleted_at IS NULL");
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $sql = "SELECT * FROM {$this->table} WHERE deleted_at IS NULL";
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute();
+
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return array_map(fn($row) => (new static($this->db))->fill($row), $rows);
     }
 
     // Pagination
@@ -171,11 +190,11 @@ abstract class Model
         $this->query[] = ['type' => 'in', 'column' => $column, 'placeholders' => $placeholders, 'values' => $values];
         return $this;
     }
-public function pluck(string $column): array
-{
-    $results = $this->get();
-    return array_column($results, $column);
-}
+    public function pluck(string $column): array
+    {
+        $results = $this->get();
+        return array_column($results, $column);
+    }
     public function whereNull(string $column): static
     {
         $this->query[] = ['type' => 'null', 'column' => $column];
