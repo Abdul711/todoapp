@@ -1,5 +1,7 @@
 <?php
 include "Controller.php";
+use App\Config\Validator;
+
 class TaskController extends Controller {
     private $service;
 
@@ -9,8 +11,9 @@ class TaskController extends Controller {
 
 
     public function index() {
-        $tasks = $this->service->getTasks();
-     
+        // $tasks = $this->service->getTasks();
+     $tasks=$this->service->getActive();  
+      
         $this->view('index', ['tasks' => $tasks]);
     }
 
@@ -19,7 +22,20 @@ class TaskController extends Controller {
     }
 
     public function store($data) {
+            $validator = new Validator();
+
+    $valid = $validator->validate($data, [
+        'title' => 'required|min:3|max:100',
+       
+    ]);
+
+    if (!$valid) {
+        // Show errors (you could redirect back with errors in session)
+        $errors = $validator->errors();
+        return $this->view('create', ['errors' => $errors, 'old' => $data]);
+    }
          $this->service->storeTask($data);
+
            $this->redirect("index");
     }
 

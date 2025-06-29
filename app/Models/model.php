@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+
 use PDO;
 
 
-abstract class Model
+abstract class Model 
 {
     protected $db;
     protected $table;
@@ -170,7 +171,11 @@ abstract class Model
         $this->query[] = ['type' => 'in', 'column' => $column, 'placeholders' => $placeholders, 'values' => $values];
         return $this;
     }
-
+public function pluck(string $column): array
+{
+    $results = $this->get();
+    return array_column($results, $column);
+}
     public function whereNull(string $column): static
     {
         $this->query[] = ['type' => 'null', 'column' => $column];

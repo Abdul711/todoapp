@@ -9,7 +9,9 @@ class TaskService {
     public function getTasks() {
         return $this->taskRepo->getAll();
     }
-
+    public function getActive(){
+         return  $this->taskRepo->getActive();
+    }
     public function storeTask($data) {
         return $this->taskRepo->create($data);
     }
