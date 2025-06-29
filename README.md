@@ -14,7 +14,6 @@ A lightweight Todo List application built from scratch using modern **OOP**, **c
 - ✅ Secure PDO database interaction
 - ✅ Environment configuration via `.env`
 - ✅ Custom router with support for dynamic parameters
-- ✅ Responsive, modern UI using **Tailwind CSS**
 - ✅ SOLID principle applied across components
 
 ---
