@@ -58,7 +58,7 @@ APP_TIMEZONE=Asia/Karachi
 Run the app
 
 Place the app in htdocs (XAMPP/WAMP) and visit:
-http://localhost/todo-app/public
+http://localhost/todo-app
 🧠 Concepts Demonstrated
 Concept	Description
 MVC Architecture	Clean separation of concerns
