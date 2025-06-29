@@ -3,7 +3,7 @@
 
 // Setup service container (DI)
 
-require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/../app/Config/database.php';
 require_once __DIR__ . '/../controllers/TaskController.php';
 require_once __DIR__ . '/../repositories/TaskRepository.php';
 require_once __DIR__ . '/../services/TaskService.php';

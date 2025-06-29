@@ -10,6 +10,6 @@
         <input type="text" name="title" value="<?= htmlspecialchars($task['title']) ?>">
         <button type="submit">Update</button>
     </form>
-    <a href="/">Back</a>
+    <a href="/todoapp">Back</a>
 </body>
 </html>

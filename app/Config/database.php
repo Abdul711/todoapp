@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../app/Config/env.php';
+require_once __DIR__ . '/env.php';
 use App\Config\Env;
 class Database {
     private $host;
@@ -12,7 +12,7 @@ class Database {
         // Load .env once
         Env::load();
       $this->host=  Env::get('DB_HOST', 'localhost');
-       $this->db   = Env::get('DB_DATABASE', 'todo_app');
+    $this->db   = Env::get('DB_DATABASE', 'todo_app');
         $this->user = Env::get('DB_USERNAME', 'root');
         $this->pass = Env::get('DB_PASSWORD', '');
         $this->port = Env::get('DB_PORT', '3306');

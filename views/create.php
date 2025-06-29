@@ -13,6 +13,6 @@
         <input type="text" name="title" placeholder="Enter task title">
         <button type="submit">Add</button>
     </form>
-    <a href="/">Back</a>
+    <a href="/todoapp">Back</a>
 </body>
 </html>
